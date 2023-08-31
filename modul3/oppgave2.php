@@ -9,21 +9,19 @@
     <a href="index.php">Go Back</a><br>
     <?php
         $sum = 0;
-        function countNumbers(int $i){
-            global $sum;
-            if ($i < 10 ){
-                sleep(1);
-                echo "$i <br>";
-                $sum += $i; 
-                $i ++;
-                countNumbers($i);
-            } else {
-                sleep(2);
-                echo $sum;
-                return $sum;
-            }
+        $i = 0;
+        while ($i < 10){
+            ob_flush();
+            flush();
+            sleep(1);
+            echo "$i <br>";
+            $sum += $i; 
+            $i ++;
         }
-        countNumbers(0);
+        ob_flush();
+        flush();
+        sleep(2);
+        echo "Sum av alle tallene er $sum";
     ?>
 </body>
 </html>

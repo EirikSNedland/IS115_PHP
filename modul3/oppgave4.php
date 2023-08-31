@@ -27,21 +27,16 @@
         <input type="submit" name="submit" value="Sjekk tilhørlighet">
     </form>
     <?php
-        $cheakKommuneInFylke = array();
-        $cheakKommuneInFylke["Kristiansand"] = "Agder";
-        $cheakKommuneInFylke["Lillesand"] = "Agder";
-        $cheakKommuneInFylke["Birkenes"] = "Agder";
-        $cheakKommuneInFylke["Harstad"] = "Troms og Finnmark";
-        $cheakKommuneInFylke["Kvæfjord"] = "Troms og Finnmark";
-        $cheakKommuneInFylke["Tromsø"] = "Troms og Finnmark";
-        $cheakKommuneInFylke["Bergen"] = "Vestland";
-        $cheakKommuneInFylke["Trondheim"] = "Trøndelag";
-        $cheakKommuneInFylke["Bodø"] = "Nordland";
-        $cheakKommuneInFylke["Alta"] = "Troms og Finnmark";
-
         if (isset($_GET["submit"])){
             $kommune = $_GET["kommune"];
-            $fylke = $cheakKommuneInFylke[$kommune];
+            $kommune = ucfirst(strtolower($kommune));
+            $fylke = match ($kommune) {
+                "Kristiansand","Lillesand","Birkenes" => "Agder",
+                "Harstad","Kvæfjord","Tromsø","Alta" => "Troms og Finnmark",
+                "Bergen" => "Vestland",
+                "Trondheim" => "Trøndelag",
+                "Bodø" => "Nordland"
+            };
             echo "$kommune ligger i $fylke fylke";
         }
 
