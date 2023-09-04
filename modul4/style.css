@@ -1,0 +1,17 @@
+form{
+    display: flex;
+    flex-direction: column;
+    max-width: 200px;
+}
+label{
+    margin-top:10px ;
+}
+.success{
+    color: green;
+}
+.failure{
+    color: red;
+}
+.highlightMistake{
+    box-shadow: 1px 1px 2px 2px red;
+}

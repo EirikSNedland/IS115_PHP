@@ -3,28 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Modul 4.2</title>
 </head>
 <body>
-    <style>
-        form{
-            display: flex;
-            flex-direction: column;
-            max-width: 200px;
-        }
-        label{
-            margin-top:10px ;
-        }
-        .success{
-            color: green;
-        }
-        .failure{
-            color: red;
-        }
-        .highlightMistake{
-            box-shadow: 1px 1px 2px 2px red;
-        }
-    </style>
     <a href="index.php">Go Back</a><br>
 
     <!--Vasking av input og validerings funksjoner  -->

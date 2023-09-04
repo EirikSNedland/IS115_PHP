@@ -9,7 +9,7 @@
     <a href="index.php">Go Back</a><br>
     <h1>Sjekk om fristen er ute!</h1>
     <p>Skriv inn dato til jobb annonse eller event for å se om fristen har gått ut</p>
-    <form>
+    <form method="get">
         <input type="date" name="inputDate">
         <input type="submit" value="Sjekk dato">
     </form>

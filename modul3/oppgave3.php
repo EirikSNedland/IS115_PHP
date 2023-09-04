@@ -25,27 +25,27 @@
     </form>
     <?php 
         if(isset($_POST["submit"])){
-        $saldo = $_POST["saldo"];
-        $rente = $_POST["rente"];
-        $years = $_POST["years"];
+            $saldo = $_POST["saldo"];
+            $rente = $_POST["rente"];
+            $years = $_POST["years"];
 
-        echo "<table class='table'>";
-        echo "<thead>";
-        echo "<tr><th>År</th><th>Saldo</th></tr>";
-        echo "</thead>";
-        echo "<tbody>";
-        for($Sn = 0; $Sn < $years + 1; $Sn++ ){
-            if ($Sn == 0){
-                $currentSaldo = $saldo;
-            }else{
-                $currentSaldo = $saldo * $rente;
+            echo "<table class='table'>";
+            echo "<thead>";
+            echo "<tr><th>År</th><th>Saldo</th></tr>";
+            echo "</thead>";
+            echo "<tbody>";
+            for($Sn = 0; $Sn < $years + 1; $Sn++ ){
+                if ($Sn == 0){
+                    $currentSaldo = $saldo;
+                }else{
+                    $currentSaldo = $saldo * $rente;
+                }
+                echo "<tr><td>$Sn</td><td>$currentSaldo</td></tr>";
+                $saldo = $currentSaldo;
             }
-            echo "<tr><td>$Sn</td><td>$currentSaldo</td></tr>";
-            $saldo = $currentSaldo;
+            echo "</tbody>";
+            echo "</table>";
         }
-        echo "</tbody>";
-        echo "</table>";
-    }
     ?>
 </body>
 </html>
