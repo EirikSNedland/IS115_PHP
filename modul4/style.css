@@ -15,3 +15,12 @@ label{
 .highlightMistake{
     box-shadow: 1px 1px 2px 2px red;
 }
+td, th{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+#updateUser{
+    right: 0;
+    top: 50px;
+    position: absolute;
+}

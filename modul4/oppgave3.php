@@ -50,6 +50,7 @@
             return true;
         }
     }
+
     ?>
     <form method="post">
         <label for="fname"> Fornavn
