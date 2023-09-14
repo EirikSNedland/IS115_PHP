@@ -27,11 +27,14 @@
             foreach($arr as $element){ 
                 $newStr .= chr($element);
             }
-            return $newStr; 
+            //Gjør binary om til hex
+            return bin2hex($newStr); 
         }
 
         function decryptText(string $text,int $key){ //tar kryptert tekst som input
             $arr = array();
+            //gjør hex til binary igjen
+            $text = hex2bin($text);
             for($i = 0; $i < strlen($text); $i++){
                 $byte = ord($text[$i]) -  $key;
                 //Hvis $bytes er lavere en 0 (ute av listen) vil de bli 255 - nummer under null for å bli innenfor gyldig verdi rekevidde for bytes (0->255)
@@ -58,7 +61,6 @@
     </form>
     <?php
         //skrive ut kryptert tekst når knapp klikkes
-
         if(isset($_POST["encrypt"])){
             echo encryptText($_POST["textToEncrypt"], $key);
         }
