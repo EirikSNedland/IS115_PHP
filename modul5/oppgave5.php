@@ -11,15 +11,33 @@
     <h1>Celsuis/Farenheit Converter</h1>
 
     <?php 
-        $celsius = 0;
+        $celsius = 0; 
         $farenheit = 32;
-        //kilde til formelene: https://no.wikipedia.org/wiki/Grad_fahrenheit
-        function celsToFaren($celsius){ //Formel: °F = (℃ × 9/5) + 32
+        /**
+         * gjør celsius til farenheit basert på formel: Formel: °F = (℃ × 9/5) + 32
+         * Link formel: https://no.wikipedia.org/wiki/Grad_fahrenheit
+         * 
+         * @param int $celsius 
+         * 
+         * @return int farenheit
+         */
+        function celsToFaren($celsius){
             return ($celsius * 9/5) + 32;
         }
-        function farenToCels(int $farenheit){ //Formel: ℃ = (°F − 32) × 5/9
+
+        /**
+         * gjør celsius til farenheit basert på formel: Formel: ℃ = (°F − 32) × 5/9
+         * Link formel: https://no.wikipedia.org/wiki/Grad_fahrenheit
+         * 
+         * @param int $farenheit
+         * 
+         * @return int celsius
+         */
+        function farenToCels(int $farenheit){
             return ($farenheit - 32) * 5/9;
         }
+
+        #basert på radio button valg bestemmer applikasjonen hvilken funksjon som skal brueks
         if(isset($_POST["convert"])){
             switch($_POST["whatToConvert"]){
                 case "celsToFaren":

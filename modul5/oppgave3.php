@@ -7,6 +7,9 @@
 </head>
 <body>
     <a href="index.php">Go Back</a><br>
-
+    <p>Video i mp4 format, kommer ingen ting opp kan det være at browseren din ikke støtter video</p>
+    <video width="400" height="400" controls>
+        <source src="diverse/phpModul5Oppg2.mp4" type="video/mp4">
+    </video>
 </body>
 </html>

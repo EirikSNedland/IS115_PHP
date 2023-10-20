@@ -13,9 +13,15 @@
     //Hensikt med key: blir hex konvertert til tekst vil ikke de uten key vite hva som står der
      $key = 9;
 
-     //Functions:
-        //Krypterer og dekrypterer basert på Cæsar cipher
-        function encryptText(string $text,int $key){ //tar ukryptert tekst som input
+        /**
+         * Krypterer og dekrypterer basert på Cæsar cipher
+         * 
+         * @param string $teks ukryptert text
+         * @param int $key, nøkkel for å gjøre det vannskligere å dekryptere for uønsket aktører
+         * 
+         * @return string kryptert tekst i hex
+         */
+        function encryptText(string $text,int $key){ 
             $arr = array();
             //for hver char i text skal konverteres til byte
             for($i = 0; $i < strlen($text); $i++){
@@ -33,17 +39,23 @@
             foreach($arr as $element){ 
                 $newStr .= chr($element);
             }
-            //Gjør binary om til hex
             return bin2hex($newStr); 
         }
 
-        function decryptText(string $text,int $key){ //tar kryptert tekst som input
+        /**
+         * Dekrypterer teksten
+         * 
+         * @param string $text kryptert tekst
+         * @param int $key nøkkel, må være lik den som ble brukt i krypterings funksjonen
+         * 
+         * @return string dekryptert tekst
+         */
+        function decryptText(string $text,int $key){
             $arr = array();
             //gjør hex til binary igjen
             $text = hex2bin($text);
             for($i = 0; $i < strlen($text); $i++){
                 $byte = ord($text[$i]) -  $key;
-                //Hvis $bytes kan ikke være lavere en 255
                 if($byte < 0){ 
                     //-1 regnes som 255, -2 = 254 osv...
                     $byte = $byte + 256;
@@ -67,7 +79,7 @@
         </label>
     </form>
     <?php
-        //sjekker om "encrypt" eksisterer, vil eksistere hvis knapp har blit klikket
+        #sjekker om "encrypt" eksisterer, vil eksistere hvis knapp har blit klikket
         if(isset($_POST["encrypt"])){
             echo encryptText($_POST["textToEncrypt"], $key);
         }
@@ -87,7 +99,7 @@
         </label>
     </form>
     <?php
-        //sjekker om decrypt eksisterer(har blitt klikket)
+        #sjekker om decrypt eksisterer(har blitt klikket)
         if(isset($_POST["decrypt"])){
             echo decryptText($_POST["textToDecrypt"], $key);
         }

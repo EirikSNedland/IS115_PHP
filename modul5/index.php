@@ -8,7 +8,7 @@
 <body>
     <a href="../">Go Back</a>
     <h1>Modul 5</h1>
-    <a href="oppgave1.php">Oppgave 1</a><br>
+    <a href="oppgave1.pdf">Oppgave 1 (pdf fil)</a><br>
     <a href="oppgave2.php">Oppgave 2</a><br>
     <a href="oppgave3.php">Oppgave 3</a><br>
     <a href="oppgave4.php">Oppgave 4</a><br>
