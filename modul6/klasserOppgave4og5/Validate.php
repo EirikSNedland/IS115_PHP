@@ -14,12 +14,11 @@
                 case self::validateMobilNr($input) == true:
                     echo "<p>input er mobilNummer</p>";
                     break;
+                case self::validatePassword($input) == true:
+                    echo "<p>Input er av typen passord</p>";
+                    break;
                 default:
-                    if (self::validatePassword($input)){
-                        echo "<p>Input er av typen passord</p>";
-                    } else {
-                        echo "<p>Input er ikke en gyldig epostadresse, mobilnummer eller passord</p>";
-                    }
+                    echo "<p>Input er ikke en gyldig epostadresse, mobilnummer eller passord</p>";
                     break;
                 }
         }
