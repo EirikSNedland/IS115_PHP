@@ -52,7 +52,7 @@
         } else {
             echo "Database tom";
         }
-        echo "</tbody> </tabele>"
+        echo "</tbody> </tabele>";
     ?>
 
 </body>
