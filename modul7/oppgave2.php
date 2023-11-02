@@ -52,10 +52,9 @@
 
             if(validateUserReg($user)){
                 echo "<p class='success'>Bruker er registrert</p>";
-                $currentDate = date("y-M-d");
                 $user["password"] =  password_hash($user["password"], PASSWORD_DEFAULT);
                 $sql = "INSERT INTO users (fname, lname, mobil, email, password, created_at) 
-                        VALUES (:fname, :lname, :mobil, :email, :password, :created_at)";
+                        VALUES (:fname, :lname, :mobil, :email, :password, now())";
                 $sp = $pdo -> prepare($sql);
 
                 $sp -> bindParam(":fname", $user["fname"], PDO::PARAM_STR);
@@ -63,7 +62,6 @@
                 $sp -> bindParam(":mobil", $user["mobil"], PDO::PARAM_STR);
                 $sp -> bindParam(":email", $user["email"], PDO::PARAM_STR);
                 $sp -> bindParam(":password", $user["password"], PDO::PARAM_STR);
-                $sp -> bindParam(":created_at", $currentDate);
 
                 try {
                     $sp -> execute();
