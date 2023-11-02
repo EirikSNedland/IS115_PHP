@@ -10,93 +10,50 @@
     <?php 
         include "div/dbcon.php";
 
-        $getUserSql = "SELECT * FROM USERS";
+        $sql = "SELECT users.fname, users.lname, users.email, mobil ,tutors.fname as tutor_fname, tutors.lname as tutor_lname, preference_course 
+            FROM `users` INNER JOIN tutors ON preference_tutor = tutor_id ORDER BY preference_tutor, preference_course";
 
-        $sp = $pdo -> prepare($getUserSql);
+        $query = $pdo -> prepare($sql);
+
 
         try{
             #Sjekker om sql statement er skrevet korrekt
-            $sp -> execute();
+            $query -> execute();
         } catch (PDOException $e){
             echo $e; //Bør logges istedenfor skrevet ut, sikkerhets risiko
         }
-        
-        while ($row = $sp->fetch(PDO::FETCH_OBJ)) {
+
+        #Så lenge den henter rows skal while løkken kjøre, stopper når det ikke er flere rows å hente
+        while ($row = $query->fetch(PDO::FETCH_OBJ)) {
             $users[] = $row; 
         }
-    ?>
-    <form method="POST">
-        <select name="userId">
-            <option selected="true" disabled="disabled">Velg bruker</option>
-            <?php 
-                foreach ($users as $user){
-                    echo "<option value='". $user -> user_id ."'>". $user -> fname. " ". $user -> lname . "</option>";
-                }
-            ?>
-        </select>
-        <input name="getPrefrences" type="submit" value="Se preferanser for bruker">
-    </form>
-
-    <?php 
-        if (isset($_POST["getPrefrences"])){
-            $sql = "SELECT timeslot_id, tutors.fname, tutors.lname, ts_date, start_time, location, course 
-            FROM timeslots INNER JOIN tutors ON tutors.tutor_id = timeslots.tutor_id 
-            WHERE timeslots.tutor_id = :preference_tutor AND course = :preference_course";
-
-            $sp = $pdo -> prepare($sql);
-
-            foreach ($users as $user) {
-                if ($user->user_id == $_POST["userId"]) {
-                    $desiredUser = $user; 
-                    break; 
-                }
+        
+        echo "<table>
+                <thead>
+                    <tr>
+                        <th>Navn</th>
+                        <th>email</th>
+                        <th>Mobil</th>
+                        <th>Preferanse LA</th>
+                        <th>Preferanse kurs</th>
+                    </tr>
+                </thead>
+                <tbody>";
+        #Skal bare skrive ut info hvis det er info å skrive ut
+        if ($query -> rowCount() > 0){
+            foreach ($users as $user){
+                echo "<tr>";
+                echo "<td>" . $user -> fname . " " . $user -> lname  . "</td>";
+                echo "<td>" . $user -> email . "</td>";
+                echo "<td>" . $user -> mobil  . "</td>";
+                echo "<td>" . $user -> tutor_fname . " " . $user -> tutor_lname  . "</td>";
+                echo "<td>" . $user -> preference_course . "</td>";
+                echo "</tr>";
             }
-
-            $sp -> bindParam(":preference_tutor", $desiredUser -> preference_tutor, PDO::PARAM_STR);
-            $sp -> bindParam(":preference_course", $desiredUser -> preference_course, PDO::PARAM_STR);
-
-            try{
-                #Sjekker om sql statement er skrevet korrekt
-                $sp -> execute();
-            } catch (PDOException $e){
-                echo $e; //Bør logges istedenfor skrevet ut, sikkerhets risiko
-            }
-
-            while ($row = $sp->fetch(PDO::FETCH_OBJ)) {
-                $timeslots[] = $row; 
-            }
-
-            echo "<p>Bruker: ".  $desiredUser -> fname . " " . $desiredUser -> lname . "<br>
-                ID til LA preferanse: ".  $desiredUser -> preference_tutor . "<br>
-                Kurs preferanse: " . $desiredUser -> preference_course . "</p>";
-
-            #Kopiert fra oppgave 1, endret på enkelte ting
-            echo "<table>
-            <thead>
-                <tr>
-                    <th>LA</th>
-                    <th>Dato</th>
-                    <th>Start tid</th>
-                    <th>Lokasjon</th>
-                    <th>Kurs</th>
-                </tr>
-            </thead>
-            <tbody>";
-            if ($sp -> rowCount() > 0){
-                foreach ($timeslots as $timeslot){
-                    echo "<tr>";
-                    echo "<td>" . $timeslot -> fname . " " . $timeslot -> lname  . "</td>";
-                    echo "<td>" . $timeslot -> ts_date . "</td>";
-                    echo "<td>" . $timeslot -> start_time  . "</td>";
-                    echo "<td>" . $timeslot -> location  . "</td>";
-                    echo "<td>" . $timeslot -> course . "</td>";
-                    echo "</tr>";
-                }
-            } else {
-                echo "Ingen timeslots oppfyller dine preferanser";
-            }
-            echo "</tbody> </tabele>";
+        } else {
+            echo "Database tom";
         }
+        echo "</tbody> </tabele>";
     ?>
 </body>
 </html>

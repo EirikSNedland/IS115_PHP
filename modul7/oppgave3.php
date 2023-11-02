@@ -7,6 +7,6 @@
 </head>
 <body>
     <a href="index.php">Go Back</a><br>
-    
+    <p>Database navn: testbookingsystemdatabase</p>
 </body>
 </html>
