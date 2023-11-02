@@ -55,6 +55,7 @@
                 $user["password"] =  password_hash($user["password"], PASSWORD_DEFAULT);
                 $sql = "INSERT INTO users (fname, lname, mobil, email, password, created_at) 
                         VALUES (:fname, :lname, :mobil, :email, :password, now())";
+                        
                 $sp = $pdo -> prepare($sql);
 
                 $sp -> bindParam(":fname", $user["fname"], PDO::PARAM_STR);
