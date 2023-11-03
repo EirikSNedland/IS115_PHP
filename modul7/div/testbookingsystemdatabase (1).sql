@@ -95,7 +95,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `fname`, `lname`, `mobil`, `email`, `password`, `preference_tutor`, `preference_course`, `created_at`) VALUES
-(1, 'karl', 'johan', '12345679', 'karlJ@bernadotte.no', 'MadeInPhPMyAdmin123', 1, 'IS115', '2023-11-01'),
+(1, 'Karl', 'Johan', '12345679', 'karlJ@bernadotte.no', 'MadeInPhPMyAdmin123', 1, 'IS115', '2023-11-01'),
 (3, 'Cookie', 'Monster', '12345678', 'cookiemonster@sesam.og', '$2y$10$WuO/88hEHsLvwYmsCPn/Ke515WlEp/4tr/XL7fRXVReMfeBjffSjC', 2, 'IS114', '2023-11-01'),
 (4, 'Herring', 'Silden', '98765432', 'herring@silden.moc', '$2y$10$30vuU0EFV28AcmF.TukcCOxB8JUUhPZFskRyxK8cM02UPUEwJonlK', 2, 'BACIT', '0000-00-00'),
 (5, 'Napoleon', 'Bonaparte', '32547618', 'napolen@bonaparte.moc', '$2y$10$Q.wblzwMw5UxnP7pLgPev.e9BVwArUe.WhKEXYgE9uRrQEhahIik2', 2, 'IS216', '0000-00-00'),
