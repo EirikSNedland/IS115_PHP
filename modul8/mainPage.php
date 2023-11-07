@@ -18,9 +18,11 @@
         echo $_SESSION["user"]["fname"] . "<br>";
         echo $_SESSION["user"]["lname"] . "<br>";
         echo $_SESSION["user"]["mobil"] . "<br>";
+        echo $_SESSION["user"]["role"] . "<br>";
 
         if(isset($_POST["logOut"])){
             unset($_SESSION["user"]);
+            session_destroy();
             header("location: index.php");
             exit;
         }
@@ -28,6 +30,10 @@
 
     <form method="POST">
         <input type="submit" name="logOut" value="Logg ut">
+    </form>
+
+    <form method="GET">
+        <input type="submit" name="laPage" value="Gå til La siden">
     </form>
 </body>
 </html>

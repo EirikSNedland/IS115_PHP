@@ -11,8 +11,9 @@
         include "div/dbcon.php";
 
         #Query som henter alle timeslot med dagens dato eller senere
-        $sql = "SELECT timeslot_id, fname, lname, ts_date, start_time, location, course 
-            FROM timeslots INNER JOIN tutors ON timeslots.tutor_id = tutors.tutor_id WHERE ts_date >= NOW()  ORDER BY ts_date";
+        $sql = "SELECT timeslot_id, users.fname, users.lname, ts_date, start_time, location, course 
+        FROM timeslots INNER JOIN tutors ON timeslots.tutor_id = tutors.tutor_id 
+        INNER JOIN users ON users.user_id = tutors.user WHERE ts_date >= NOW() ORDER BY ts_date";
             
         $query = $pdo -> prepare($sql);
 

@@ -10,8 +10,11 @@
     <?php
         include "div/dbcon.php";
 
-        $sql = "SELECT timeslot_id, fname, lname, ts_date, start_time, location, course 
-            FROM timeslots INNER JOIN tutors ON timeslots.tutor_id = tutors.tutor_id ORDER BY ts_date";
+        $sql = "SELECT timeslot_id, users.fname, users.lname, ts_date, start_time, location, course 
+            FROM timeslots 
+            INNER JOIN tutors ON timeslots.tutor_id = tutors.tutor_id
+            INNER JOIN users ON tutors.user = users.user_id
+            ORDER BY ts_date;";
         $query = $pdo -> prepare($sql);
 
 

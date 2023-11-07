@@ -10,8 +10,17 @@
     <?php 
         include "div/dbcon.php";
 
-        $sql = "SELECT users.fname, users.lname, users.email, mobil ,tutors.fname as tutor_fname, tutors.lname as tutor_lname, preference_course 
-            FROM `users` INNER JOIN tutors ON preference_tutor = tutor_id ORDER BY preference_tutor, preference_course";
+        $sql = "SELECT u.fname AS fname, 
+                u.lname AS lname,
+                u.email AS email, 
+                u.mobil AS mobil, 
+                tu.fname AS tutor_fname, 
+                tu.lname AS tutor_lname, 
+                u.preference_course
+            FROM users u 
+            INNER JOIN tutors t ON u.preference_tutor = t.tutor_id 
+            INNER JOIN users tu ON t.user = tu.user_id 
+            ORDER BY u.preference_tutor, u.preference_course";
 
         $query = $pdo -> prepare($sql);
 
