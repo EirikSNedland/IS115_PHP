@@ -11,10 +11,11 @@
         require_once "div/dbcon.php";
 
         if(isset($_POST["logIn"])){
+
             $email = sanetize($_POST["email"]);
             $password = sanetize($_POST["password"]);
 
-            $sql = "SELECT fname, lname, email, mobil, users.password FROM users WHERE email = :email";
+            $sql = "SELECT users.user_id, fname, lname, email, mobil, users.password FROM users WHERE email = :email";
 
             $sp = $pdo -> prepare($sql);
 
@@ -33,7 +34,18 @@
 
 
             if(password_verify($password, $user -> password)){
-                echo "<br>success";
+                session_start();
+                $_SESSION['user']['email'] = $user -> email;
+                $_SESSION['user']['userId'] = $user -> user_id;
+                $_SESSION['user']['fname'] = $user -> fname;
+                $_SESSION['user']['lname'] = $user -> lname;
+                $_SESSION['user']['mobil'] = $user -> mobil;
+                $_SESSION['user']['loggedIn'] = true;
+             
+                /* Videresender brukeren til innsiden av systemet */
+                header("Location: mainPage.php"); exit();
+            } else {
+                echo "Feil brukernavn eller passord";
             }
         }
     ?>
