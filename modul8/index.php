@@ -30,19 +30,23 @@
     
             $user = $sp->fetch(PDO::FETCH_OBJ);
 
-            if(password_verify($password, $user -> password)){
-                session_start();
-                $_SESSION['user']['email'] = $user -> email;
-                $_SESSION['user']['userId'] = $user -> user_id;
-                $_SESSION['user']['fname'] = $user -> fname;
-                $_SESSION['user']['lname'] = $user -> lname;
-                $_SESSION['user']['mobil'] = $user -> mobil;
-                $_SESSION['user']['loggedIn'] = true;
-             
-                /* Videresender brukeren til innsiden av systemet */
-                header("Location: mainPage.php"); exit();
+            if(!$user == null){
+                if(password_verify($password, $user -> password)){
+                    session_start();
+                    $_SESSION['user']['email'] = $user -> email;
+                    $_SESSION['user']['userId'] = $user -> user_id;
+                    $_SESSION['user']['fname'] = $user -> fname;
+                    $_SESSION['user']['lname'] = $user -> lname;
+                    $_SESSION['user']['mobil'] = $user -> mobil;
+                    $_SESSION['user']['loggedIn'] = true;
+                 
+                    /* Videresender brukeren til innsiden av systemet */
+                    header("Location: mainPage.php"); exit();
+                } else {
+                    echo "Feil brukernavn eller passord";
+                }
             } else {
-                echo "Feil brukernavn eller passord";
+                echo "Bruker eksisterer ikke";
             }
         }
     ?>
