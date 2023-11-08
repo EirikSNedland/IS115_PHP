@@ -9,7 +9,7 @@
     <?php
         session_start();
 
-        if (!isset($_SESSION["user"])) {
+        if (!$_SESSION["user"]["logedIn"]) {
             header("location: index.php");
             exit;
         }
@@ -26,14 +26,25 @@
             header("location: index.php");
             exit;
         }
+
+        if(isset($_POST["laPage"])){
+            header("location: laPage.php");
+            exit;
+        }
     ?>
 
     <form method="POST">
         <input type="submit" name="logOut" value="Logg ut">
     </form>
 
-    <form method="GET">
+    <form method="POST">
         <input type="submit" name="laPage" value="Gå til La siden">
     </form>
+    <?php 
+        if(isset($_SESSION["msg"])){
+            echo $_SESSION["msg"];
+            //unset($_SESSION["msg"]);
+        }
+    ?>
 </body>
 </html>

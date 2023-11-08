@@ -6,6 +6,15 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <?php 
+        session_start();
+
+        if($_SESSION["user"]["role"] != "LA"){
+            $_SESSION["msg"] = "Har ikke tilgang til siden du prøver å gå til";
+            header("location: mainPage.php");
+            exit;
+        }
+    ?>
+    LA page
 </body>
 </html>

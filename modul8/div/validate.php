@@ -9,7 +9,7 @@
 
     function cheackUserRole($userId ,$pdo){
 
-        $sql = "SELECT tutor_id FROM tutors WHERE tutor_id = :user_id";
+        $sql = "SELECT tutor_id FROM tutors WHERE tutors.user = :user_id";
 
         $sp = $pdo -> prepare($sql);
 

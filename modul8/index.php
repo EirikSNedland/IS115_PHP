@@ -39,6 +39,7 @@
                     $_SESSION['user']['lname'] = $user -> lname;
                     $_SESSION['user']['mobil'] = $user -> mobil;
                     $_SESSION['user']['role'] = cheackUserRole($user -> user_id, $pdo);
+                    $_SESSION['user']['logedIn'] = true;
                  
                     /* Videresender brukeren til innsiden av systemet */
                     header("Location: mainPage.php"); exit();
