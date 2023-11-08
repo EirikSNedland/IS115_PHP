@@ -14,7 +14,9 @@
             header("location: mainPage.php");
             exit;
         }
+        
     ?>
-    LA page
+    <h1>LA siden</h1>
+    <a href="mainPage.php">Gå tilbake</a>
 </body>
 </html>

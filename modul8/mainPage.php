@@ -9,6 +9,12 @@
     <?php
         session_start();
 
+        #Hvis unset ikke blir gjort før login check vil msg vises når ny bruker logger in
+        if(isset($_SESSION["msg"])){
+            $msg = $_SESSION["msg"];
+            unset($_SESSION["msg"]);
+        }
+
         if (!$_SESSION["user"]["logedIn"]) {
             header("location: index.php");
             exit;
@@ -23,7 +29,7 @@
         if(isset($_POST["logOut"])){
             unset($_SESSION["user"]);
             session_destroy();
-            header("location: index.php");
+            header("location: index.php/?status=loggedout");
             exit;
         }
 
@@ -41,9 +47,8 @@
         <input type="submit" name="laPage" value="Gå til La siden">
     </form>
     <?php 
-        if(isset($_SESSION["msg"])){
-            echo $_SESSION["msg"];
-            //unset($_SESSION["msg"]);
+        if(isset($msg)){
+            echo $msg;
         }
     ?>
 </body>

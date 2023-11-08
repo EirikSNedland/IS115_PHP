@@ -6,6 +6,7 @@
     <title>Logg inn</title>
 </head>
 <body>
+    <a href="../../index.php">Go Back</a>
     <?php 
         include "div/validate.php";
         require_once "div/dbcon.php";
@@ -42,7 +43,8 @@
                     $_SESSION['user']['logedIn'] = true;
                  
                     /* Videresender brukeren til innsiden av systemet */
-                    header("Location: mainPage.php"); exit();
+                    header("Location: mainPage.php");
+                    exit();
                 } else {
                     echo "Feil brukernavn eller passord";
                 }
@@ -60,5 +62,10 @@
 
         <input type="submit" name="logIn" value="Logg Inn">
     </form>
+    <?php 
+        if(isset($_GET["status"])){
+            echo "Succesful logout";
+        }
+    ?>
 </body>
 </html>
