@@ -6,10 +6,18 @@
     <title>Logg inn</title>
 </head>
 <body>
-    <a href="../../index.php">Go Back</a>
+    <a href="../index.php">Go Back</a>
     <?php 
         include "div/validate.php";
         require_once "div/dbcon.php";
+
+        session_start();
+
+        #Hvis session med logOutMsg eksisterer: fjern den men lagre melding i variabel
+        if (isset($_SESSION["logOutMsg"])) {
+            $logOutMsg = $_SESSION["logOutMsg"];
+            unset($_SESSION["logOutMsg"]);
+        }
 
         if(isset($_POST["logIn"])){
 
@@ -33,7 +41,6 @@
 
             if(!$user == null){
                 if(password_verify($password, $user -> password)){
-                    session_start();
                     $_SESSION['user']['email'] = $user -> email;
                     $_SESSION['user']['userId'] = $user -> user_id;
                     $_SESSION['user']['fname'] = $user -> fname;
@@ -63,8 +70,8 @@
         <input type="submit" name="logIn" value="Logg Inn">
     </form>
     <?php 
-        if(isset($_GET["status"])){
-            echo "Succesful logout";
+        if(isset($logOutMsg)){
+            echo $logOutMsg;
         }
     ?>
 </body>

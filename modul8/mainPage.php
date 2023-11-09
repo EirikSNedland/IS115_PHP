@@ -29,7 +29,9 @@
         if(isset($_POST["logOut"])){
             unset($_SESSION["user"]);
             session_destroy();
-            header("location: index.php/?status=loggedout");
+            session_start();
+            $_SESSION['logOutMsg'] = "Du er nå logget ut";
+            header("location: index.php");
             exit;
         }
 
