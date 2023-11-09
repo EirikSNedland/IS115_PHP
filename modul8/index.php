@@ -39,24 +39,19 @@
     
             $user = $sp->fetch(PDO::FETCH_OBJ);
 
-            if(!$user == null){
-                if(password_verify($password, $user -> password)){
-                    $_SESSION['user']['email'] = $user -> email;
-                    $_SESSION['user']['userId'] = $user -> user_id;
-                    $_SESSION['user']['fname'] = $user -> fname;
-                    $_SESSION['user']['lname'] = $user -> lname;
-                    $_SESSION['user']['mobil'] = $user -> mobil;
-                    $_SESSION['user']['role'] = cheackUserRole($user -> user_id, $pdo);
-                    $_SESSION['user']['logedIn'] = true;
-                 
-                    /* Videresender brukeren til innsiden av systemet */
-                    header("Location: mainPage.php");
-                    exit();
-                } else {
-                    echo "Feil brukernavn eller passord";
-                }
+            if(!$user == null && password_verify($password, $user -> password)){
+                $_SESSION['user']['email'] = $user -> email;
+                $_SESSION['user']['userId'] = $user -> user_id;
+                $_SESSION['user']['fname'] = $user -> fname;
+                $_SESSION['user']['lname'] = $user -> lname;
+                $_SESSION['user']['mobil'] = $user -> mobil;
+                $_SESSION['user']['role'] = cheackUserRole($user -> user_id, $pdo);
+                $_SESSION['user']['logedIn'] = true;
+                
+                header("Location: mainPage.php");
+                exit();
             } else {
-                echo "Bruker eksisterer ikke";
+                echo "Feil brukernavn eller passord";
             }
         }
     ?>
