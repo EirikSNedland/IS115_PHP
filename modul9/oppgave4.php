@@ -16,12 +16,15 @@
     </ul>
     </form>
     <?php 
+        require("Logger.php");
+        $event = "Side oppgave 4 lastet inn";
+        loggEvent($event);
+
         if(isset($_GET["file"])){
             $fileToDownload = $_GET["file"];
             $filePath = "./katalog/ignoreMe/" . sanitize($fileToDownload);
 
             if(file_exists($filePath)){
-                echo "<br>fant fil<br>";
                 header("Content-Description: File Transfer");
                 header("Content-Type: application/pdf");
                 header("Content-Length: " . filesize($filePath));
@@ -30,9 +33,13 @@
                 header("Pragma: public");
 
                 readfile($filePath);
+
+                loggEvent("Bruker lastet ned " . $fileToDownload);
+
                 exit;
             } else {
                 echo "Noe gikk gale";
+                loggEvent("Error: Bruker fikk ikke lastet ned fil");
             }
         }
     ?>

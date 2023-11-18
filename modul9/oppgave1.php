@@ -22,6 +22,10 @@
         </thead>
         <tbody>
     <?php
+        require("Logger.php");
+        $event = "Side oppgave 1 lastet inn";
+        loggEvent($event);
+
         $folder = "./katalog/";
         $pointer = opendir($folder);
         while ($file = readdir($pointer)){
@@ -32,7 +36,7 @@
             echo "<td>". date( "d.m.Y H:i" , filemtime($folder . $file)) . "</td>";
             echo "<td>". (is_executable($folder . $file) ? "Ja" : "Nei") . "</td>";
             echo "<td>". (is_readable($folder . $file) ? "Ja" : "Nei") . "</td>";
-            echo "<td>". (is_executable($folder . $file) ? "Ja" : "Nei") . "</td>";
+            echo "<td>". (is_writable($folder . $file) ? "Ja" : "Nei") . "</td>";
             echo "</tr>";
         }
     ?>

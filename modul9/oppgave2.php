@@ -8,30 +8,27 @@
 </head>
 <body>
     <a href="index.php">Go Back</a><br> 
-    <?php
-        $folder = "./katalog/";
-        $pointer = opendir($folder);
-        if(isset($_POST["submit"])){
-            if(file_exists($folder . "log.txt")){
-               $file =  fopen($folder . "log.txt", "a+") or die("Kunne ikke åpne log fil");
-               $text = "<p>Log: " . date("d.m.Y H:i") . "<br> hendelse: " . $_POST["event"] . "</p>";
-               fwrite($file, $text);
-               fclose($file);
-            } else {
-                echo "fil eksisterer ikke";
-            }
-        }
-    ?>
-    <form method="POST">
-        <input type="text" name="event">
-        <input type="submit" name="submit">
-    </form>
+    <p>Hvis listen inneholder mindre en 10 log eventer har du ikke besøkt nok sider <br>
+        Loggen vil fylle seg opp etterhvert som oppgavene blir godt igjenom. <br>
+        Alle handlinger i fra å laste inn sider til laste ned dokument vil generere <br>
+        ny logg item.
+    </p>
     <?php 
+        require("Logger.php");
+        $event = "Side oppgave 2 lastet inn";
+        loggEvent($event);
+
+        global $folder;
         if(file_exists($folder . "log.txt")){
-            $file =  fopen($folder . "log.txt", "r") or die("Kunne ikke åpne log fil");
-            $fileContent = fread($file,500);
-            fclose($file);
-            echo $fileContent;
+            $fileContent = file($folder . "log.txt");
+            $lastTenEntries = array_slice($fileContent, -10);
+
+            #skriver ut de ti siste events fra logg
+            foreach ($lastTenEntries as $entry){
+                echo  $entry;
+            }
+
+            
          } else {
              echo "fil eksisterer ikke";
          }

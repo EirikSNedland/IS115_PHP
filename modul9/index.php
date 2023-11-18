@@ -6,6 +6,11 @@
     <title>Modul 9</title>
 </head>
 <body>
+    <?php 
+        require("Logger.php");
+        $event = "Meny lastet inn";
+        loggEvent($event);     
+    ?>
     <a href="../">Go Back</a>
     <h1>Modul 9</h1>
     <a href="oppgave1.php">Oppgave 1</a><br>

@@ -12,6 +12,10 @@
 <body>
     <a href="index.php">Go Back</a><br> 
     <?php 
+    require("Logger.php");
+    $event = "Side oppgave 3 lastet inn";
+    loggEvent($event);
+
     session_start();
     $msgArray = array();
 
@@ -78,8 +82,10 @@
                     if ($uploadedFile){
                         $msgArray[] = "Gratulerer med nytt profilbilde";
                         $_SESSION["user"]["profilePic"] = $fileName;
+                        loggEvent("Nytt profilbilde lastet opp");
                     } else{
                         $msgArray[] = "Noe gikk gale, nytt profilbilde ble ikke lastet opp";
+                        loggEvent("Error: Nytt profilbilde ikke lastet opp");
                     }
 
                 }
