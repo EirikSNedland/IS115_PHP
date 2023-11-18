@@ -97,6 +97,7 @@
     <!--img skal bruke default bilde hvis bruker ikke har profilbilde-->
     <img id="profilePicture" alt="Profile bilde" src="<?php 
     if($_SESSION["user"]["profilePic"] === null){
+        #Placeholder profil bilde
         echo "./katalog/profilBilder/pp.jpg";
     } else {
         echo "./katalog/profilBilder/" .  $_SESSION["user"]["profilePic"];

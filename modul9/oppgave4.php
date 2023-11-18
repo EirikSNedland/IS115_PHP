@@ -25,21 +25,23 @@
             $filePath = "./katalog/ignoreMe/" . sanitize($fileToDownload);
 
             if(file_exists($filePath)){
-                header("Content-Description: File Transfer");
-                header("Content-Type: application/pdf");
-                header("Content-Length: " . filesize($filePath));
-                header("Content-Transfer-Encoding: Binary");
+                header("Content-Description: File Transfer"); //Siden skal overføre en fil
+                header("Content-Type: application/pdf"); //Fil type pdf
+                header("Content-Length: " . filesize($filePath)); //Git beskjed om fil størrelse
+                header("Content-Transfer-Encoding: Binary"); //FIl skal behandkles som binar data
                 header("Content-Disposition: attachment; filename=\"" . $_GET["file"] ."\" "); 
-                header("Pragma: public");
+                header("Pragma: public"); //brukes for a cache filen på klient siden
 
+                #Sender fil tik klient som en stream
                 readfile($filePath);
 
+                #Random logg event go!
                 loggEvent("Bruker lastet ned " . $fileToDownload);
 
                 exit;
             } else {
-                echo "Noe gikk gale";
                 loggEvent("Error: Bruker fikk ikke lastet ned fil");
+                echo "Fant ikke fil";
             }
         }
     ?>

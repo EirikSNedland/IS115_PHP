@@ -37,6 +37,7 @@
 
     $pdf -> useTemplate($fs);
 
+    #Bedrift navn til de som snedte faktura øverst
     $pdf -> SetFont("Arial", "B", 14);
     $pdf -> Cell(50, 5, $invoiceIssuer, 0,0,"C");
 
@@ -46,6 +47,7 @@
 
     $pdf -> Image("./katalog/testPics/cookie.png", 65, 0, 70, 70);
     
+    #Info kunde
     $pdf -> SetXY(8,50);
     $pdf -> SetFont("Arial","",8);
     $pdf -> Cell(10, 5, "Navn: " . $name);
@@ -53,6 +55,7 @@
     $pdf -> SetXY(20,50);
     $pdf -> Cell(10, 13, "Adresse: " . $adr, 0,0,"C");
 
+    #Info produkt og pris
     $pdf -> SetY(100);
     $pdf -> SetFont("Arial","",8);
     $pdf -> Cell(55, 0, $productName);
@@ -72,6 +75,7 @@
     $pdf -> SetFont("Arial","B",12);
     $pdf -> Write(0, $price * $amount * 1.25 . "kr");
 
+    #Vis ferdig faktura
     $pdf -> output("I", "faktura.pdf");
 
     ?>

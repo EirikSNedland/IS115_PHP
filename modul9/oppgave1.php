@@ -28,6 +28,8 @@
 
         $folder = "./katalog/";
         $pointer = opendir($folder);
+        
+        #Skriver ut info om innhold i mappen
         while ($file = readdir($pointer)){
             echo "<tr>";
             echo "<td>". $file . "</td>";
