@@ -20,7 +20,10 @@
 
         global $folder;
         if(file_exists($folder . "log.txt")){
+            #Henter filinhold som array, hver linje er et element
             $fileContent = file($folder . "log.txt");
+
+            #Henter ut de siste ti elementene
             $lastTenEntries = array_slice($fileContent, -10);
 
             #skriver ut de ti siste events fra logg
